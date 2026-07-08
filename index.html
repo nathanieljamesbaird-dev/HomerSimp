@@ -40,34 +40,45 @@
 
     --HomerYellow: #FED90F;
     --HomerShoe: #D1B271;
-    --FWhite: #FFFFFF;
+    --FWhite: #FED90F;
     --SpringfieldBlue: #70D1FE;
     --SewageGreen: #424F46;
     --SpecialBlack: #202020;
     --ButtonBackground: #202020;
+    --Intro:#202020;
+    --WhitePage:#FFFFFF;
 }
 
 .darkmode {
     /* NEEDS REDOING */
     --HomerYellow: #F2C81E;
     --HomerShoe: #B89A5E;
-    --FWhite: #202020;
+    --FWhite: #FFFFFF;
     --SpringfieldBlue: #4C9FD1;
     --SewageGreen: #5C6E64;
     --SpecialBlack: #101416;
     --NightSurface: #1B2227;   
     --NightBorder: #2A3339; 
-    --ButtonBackground: #E7EAEB;
+    --ButtonBackground: #202020;
+    --DarkBackground: ;
+    --Intro:#FFFFFF;
+}
+
+.darkmode .background-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0,0,0,0.5);
+
+
 }
 
 body {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
-
-body.darkmode .background-section::after {
-    background-color: rgba(32, 32, 32, 0.75); /* Drapes Springfield in night shadows */
-}
-
 
 .background-section {
     width: 100%;
@@ -79,12 +90,23 @@ body.darkmode .background-section::after {
     background-image: url(assets/img/Springfield_1920x1080.png);
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(2px);
-    transform: scale(1.05);
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.background-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px); 
+    z-index: 1;
 }
 
 .background-section::after {
-    background-color: rgba(255,255,255,0.1);
+    background-color: var(--DarkBackground);
 }
 
 header {
@@ -97,7 +119,7 @@ header {
     position: sticky;
 }
 
-header > img {
+header > a >img {
     height: 10dvh;
 }
 
@@ -115,6 +137,8 @@ header > nav > a {
     cursor: pointer;
     text-decoration: none;
     color: var(--FWhite);
+    transition: all 0.2s ease;
+    -webkit-text-stroke: 0.5px black;
 }
 
 header > nav > a:hover {
@@ -265,6 +289,18 @@ header > nav > button:hover {
     right: 0;
 }
 
+.intro {
+    width: 100%;
+    height: 100dvh;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    margin-top: 75dvh;
+
+    background-color: var(--WhitePage);
+
+}
+
 </style>
 
 <body class="">
@@ -273,7 +309,9 @@ header > nav > button:hover {
 
     <header>
 
-        <img src="assets/img/logo/The_Simpsons_-_Logo.webp">
+            <a href="#home" onclick="new Audio('assets/sound/maggie.mp3').play()">
+                <img src="assets/img/logo/The_Simpsons_-_Logo.webp">
+            </a>
 
         <nav>
             <a href="#home" onclick="new Audio('assets/sound/boring_5.mp3').play()">Home</a>
@@ -312,6 +350,15 @@ header > nav > button:hover {
 
         </form>
     </dialog>
+
+    <section class="intro">
+
+        <div class="intro-container">
+        <h1>Welcome to the Simpson Services!</h1>
+        <img src="assets/img/intro/happyHomer.png">
+        </div>
+
+    </section>
     
 </body>
 </html>
