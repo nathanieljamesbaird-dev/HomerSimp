@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PAGE TITLE -->
+    <title>Home - HomerService | nbaird.dev@gmail.com</title>
+
+    <!-- PAGE ICON -->
+    <link rel="icon" href="assets/img/logo/The_Simpsons_-_Logo.webp">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <!-- BOOTSTRAP COMPONENT -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- LIGHT/DARK MODE -->
+    <script type="text/javascript" src="assets/js/darkmode.js" defer></script>
+
+</head>
+
+<style>
+
+@font-face {
+    font-family: 'Simpsons';
+    src: url(assets/fonts/Simpsonfont\ DEMO.otf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+
+    /* FONT */
+    
+    --Sim:'Simpsons';
+
+    /* COLOR */
+
+    --HomerYellow: #FED90F;
+    --HomerShoe: #D1B271;
+    --FWhite: #FFFFFF;
+    --SpringfieldBlue: #70D1FE;
+    --SewageGreen: #424F46;
+    --SpecialBlack: #202020;
+    --ButtonBackground: #202020;
+}
+
+.darkmode {
+    /* NEEDS REDOING */
+    --HomerYellow: #F2C81E;
+    --HomerShoe: #B89A5E;
+    --FWhite: #202020;
+    --SpringfieldBlue: #4C9FD1;
+    --SewageGreen: #5C6E64;
+    --SpecialBlack: #101416;
+    --NightSurface: #1B2227;   
+    --NightBorder: #2A3339; 
+    --ButtonBackground: #E7EAEB;
+}
+
+body {
+    overflow: hidden;
+}
+
+body.darkmode .background-section::after {
+    background-color: rgba(32, 32, 32, 0.75); /* Drapes Springfield in night shadows */
+}
+
+
+.background-section {
+    width: 100%;
+    height: 100dvh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-image: url(assets/img/Springfield_1920x1080.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(2px);
+    transform: scale(1.05);
+}
+
+.background-section::after {
+    background-color: rgba(255,255,255,0.1);
+}
+
+header {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    margin-top: 3dvh;
+    position: sticky;
+}
+
+header > img {
+    height: 10dvh;
+}
+
+header > nav {
+    display: flex;
+    flex-direction: row;
+    gap: 3.3vw;
+    align-self: center;
+}
+
+header > nav > a {
+    font-size: 1.3rem;
+    font-family: var(--Sim);
+    align-self: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--FWhite);
+}
+
+header > nav > a:hover {
+    text-decoration: underline;
+    text-underline-offset: 1dvh;
+}
+
+header > nav > button {   
+    font-size: 1.3rem;
+    font-family: var(--Sim);
+    border: transparent;
+    background-color: var(--ButtonBackground);
+    color: var(--FWhite);
+    padding: 10px 30px;
+    border-radius: 10px 30px;
+    transition: all 0.3s ease;
+}
+
+header > nav > button:hover {
+    transform: scale(1.05);
+}
+
+#themeSwitch {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    border: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 5;
+    cursor: pointer;;
+}
+
+#themeSwitch > svg {
+    color: var(--SpecialBlack);
+}
+
+#themeSwitch > svg:last-child {
+    display: none;
+}
+
+.darkmode #themeSwitch > svg:first-child {
+    display: none;
+}
+
+
+.darkmode #themeSwitch > svg:last-child {
+    display: block;
+}
+
+#signin-btn::backdrop {
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+}
+
+#signin-btn {
+    border-radius: 1rem;
+    padding: 10px 30px;
+    padding-bottom: 3dvh;
+    position: relative;
+}
+
+#signin-btn > form {
+    display: flex;
+    flex-direction: column;
+    gap: 1dvh;
+}
+
+#signin-btn > h1 {
+    text-align: center;
+    font-family: var(--Sim);
+    color: var(--SpecialBlack);
+}
+
+#signin-btn > form > label {
+    font-family: var(--Sim);
+    font-size: 1.2rem;
+}
+
+#signin-btn > form > input {
+    font-family: var(--Sim);
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--SpecialBlack);
+    color: var(--SpecialBlack);
+    font-size: 1.2rem
+}
+
+#signin-btn > form > input:focus {
+    outline: none;
+}
+
+#signin-btn > form > button {
+    font-family: var(--Sim);
+    font-size: 1.2rem;
+    border-radius: 4px;
+    border: transparent;
+    background-color: var(--HomerYellow);
+    width: fit-content;
+    margin: auto;
+    margin-top: 3dvh;
+    padding: 4px 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#signin-btn > form > button:hover {
+    transform: scale(1.05);
+    filter: brightness(80%);
+}
+
+#signin-btn > form > span {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    font-family: var(--Sim);
+}
+
+#signin-btn > form > span > a {
+    text-decoration: none;
+    color: var(--Sim);
+    cursor: pointer;
+}
+
+#signin-btn > form > span > a:hover {
+    text-decoration: underline;
+    text-underline-offset: 1dvh;
+}
+
+#signin-btn >button > svg {
+    fill: var(--SpecialBlack);
+}
+
+#signin-btn > button {
+    background: transparent;
+    border: transparent;
+    width: 50px;
+    width: 50px;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+}
+
+</style>
+
+<body class="">
+
+    <div class="background-section" id="home"></div>
+
+    <header>
+
+        <img src="assets/img/logo/The_Simpsons_-_Logo.webp">
+
+        <nav>
+            <a href="#home" onclick="new Audio('assets/sound/boring_5.mp3').play()">Home</a>
+            <a href="#" onclick="new Audio('assets/sound/burp.mp3').play()">About us</a>
+            <a href="#" onclick="new Audio('assets/sound/scream-short.mp3').play()">Services</a>
+            <a href="#" onclick="new Audio('assets/sound/evil.mp3').play()">Join us!</a>
+            <a href="#" onclick="new Audio('assets/sound/longscream.mp3').play()">Support</a>
+            <button commandFor="signin-btn" command="show-modal">Sign in</button>
+        </nav>
+
+        <button id="themeSwitch">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+        </button>
+    </header>
+
+    <dialog id="signin-btn" closedby="any">
+
+        <button commandFor="signin-btn" command="close">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </button>
+
+        <h1>Login</h1>
+
+        <form action="" method="post">
+
+            <label for="user_username">Username</label>
+            <input type="text" placeholder="username..." name="user_username">
+
+            <label for="user_password">Password</label>
+            <input type="password" required placeholder="password..." name="user_password">
+
+            <button type="submit">Login</button>
+
+            <span>Don't have an account?<a href="#">Register here</a></span>
+
+        </form>
+    </dialog>
+    
+</body>
+</html>
+
