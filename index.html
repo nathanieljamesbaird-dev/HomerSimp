@@ -23,6 +23,7 @@
 
 <style>
 
+
 @font-face {
     font-family: 'Simpsons';
     src: url(assets/fonts/Simpsonfont\ DEMO.otf);
@@ -47,6 +48,7 @@
     --ButtonBackground: #202020;
     --Intro:#202020;
     --WhitePage:#FFFFFF;
+    --textWhite: #f5f5f5;
 }
 
 .darkmode {
@@ -74,6 +76,10 @@
     background-color:rgba(0,0,0,0.5);
 
 
+}
+
+html  {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -117,6 +123,8 @@ header {
     justify-content:space-around;
     margin-top: 3dvh;
     position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header > a >img {
@@ -225,12 +233,16 @@ header > nav > button:hover {
 }
 
 #signin-btn > form > input {
-    font-family: var(--Sim);
+
     padding: 4px;
     border-radius: 4px;
     border: 1px solid var(--SpecialBlack);
     color: var(--SpecialBlack);
     font-size: 1.2rem
+}
+
+#signin-btn > form > input::placeholder {
+    font-family: var(--Sim);
 }
 
 #signin-btn > form > input:focus {
@@ -296,10 +308,430 @@ header > nav > button:hover {
     position: absolute;
     left: 0;
     margin-top: 75dvh;
-
     background-color: var(--WhitePage);
 
 }
+
+.intro > .intro-container {
+    position:relative;
+}
+
+.intro > .intro-container > h1 {
+    font-family: var(--Sim);
+    font-weight: 400;
+    position: absolute;
+    top: 40dvh;
+    left: 15vw;
+    animation: hSideSwing linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 50%;
+}
+
+@keyframes hSideSwing {
+    
+    from {
+        transform: translateX(-300px);
+    } to {
+        transform: translateX(0);
+    }
+
+}
+
+.intro > .intro-container > img {
+    position: absolute;
+    right: 20vw;
+    top: 8dvh;
+    height: 80dvh;
+}
+
+.intro > .intro-container > p {
+    position: absolute;
+    font-family: var(--Sim);
+    width: 350px;
+    top: 47dvh;
+    left: 35vw;
+    text-align: right;
+    font-weight: 100;
+    color: rgba(0, 0, 0, 0.595);
+    animation: pOA linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 50%;
+}
+
+@keyframes pOA {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+.intro > .intro-container > h1 > span {
+    color: var(--HomerYellow);
+    -webkit-text-stroke: 0.4px var(--ButtonBackground);
+}
+
+#interactiveElement {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.about-us {
+    width: 100%;
+    position: absolute;
+    top: 180dvh;
+    left: 0;
+    height: 90dvh;
+}
+
+.art-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.circlejerk {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: var(--HomerYellow);
+    position: relative;
+    left: 20vw;
+    top: 10dvh;
+    transition: all 0.8s ease;
+}
+
+.circlejerk:hover {
+    transform: translateX(300px);
+}
+
+.circlejerk::before {
+    content: '';
+    position: absolute;
+    width: 1000px;
+    height: 100%;
+    left: -60vw;
+    /* height: 150px; */
+    background-color: var(--HomerYellow);
+
+}
+
+.circlejerk::after {
+    content: 'About us';
+    position: absolute;
+    font-family: var(--Sim);
+    font-size: 5rem;
+    width: 500px;
+    align-self: center;
+    text-align: center;
+    left: -20vw;
+    top: 0;
+    bottom: 0;
+    /* background: red; */
+}
+
+.circlejerk > img {
+    position: absolute;
+    height: 30dvh;
+    transform: rotate(90deg);
+    left: -43vw;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.about-contianer {
+    position: relative;
+    width: 100%;
+    background-color: red;
+    height: 100%;
+}
+
+.about-container > p {
+    width: 800px;
+    font-family: var(--Sim);
+    font-size: 1.2rem;
+    position: absolute;
+    top: 43dvh;
+    left:3vw;
+}
+
+.about-container > .family-background > img {
+    height: 40rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 15vw;
+    filter: drop-shadow(10px 0 10px rgba(0,0,0,0.3));
+}
+
+.about-container > .family-background {
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background-color: var(--HomerYellow);
+    position: absolute;
+    right: -10vw;
+    top: 45dvh;
+}
+
+.about-container > .family-background::before {
+    content: '';
+    width: 400px;
+    height: 100%;
+    background-color: var(--HomerYellow);
+    position: absolute;
+    right: 0;
+}
+
+.about-container > p:nth-child(2) {
+    position: absolute;
+    top: 53dvh;
+    left: 3vw;
+}
+
+.about-container > h3 {
+    position:absolute;
+    top: 71dvh;
+    left: 6vw;
+    font-family: var(--Sim);
+    font-size: 1.3rem;
+}
+
+.about-container > ul {
+    position: absolute;
+    top: 77dvh;
+    left: 7vw;
+    width: 650px;
+    font-family: var(--Sim);
+    line-height: 3;
+}
+
+.about-container > .aboutclosing {
+    position: absolute;
+    top: 108dvh;
+    left: 3vw;
+}
+
+.family-background {
+    animation: slideOutAnimation linear backwards;
+    animation-timeline: view();
+    animation-range: entry -150vw cover 30%;
+}
+
+@keyframes slideOutAnimation {
+    from {
+        /* opacity: 0; */
+        transform: translatex(100vw);
+    } to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.circle-wrap {
+    animation: slideOutAbout linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 50%;
+}
+
+@keyframes slideOutAbout {
+    from {
+        transform: translateX(-50vw);
+    } to {
+        transform: translateX(0);
+    }
+}
+
+html, body {
+    overflow-x:hidden;
+    max-width: 100%;
+}
+
+.services-container {
+    position: absolute;
+
+    width: 100%;
+    height: 80dvh;
+    top: 330dvh;
+    left: 0;
+}
+
+.services-container > h1 {
+    position: absolute;
+    right: 20vw;
+    top: 10dvh;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: var(--HomerYellow);
+
+}
+
+.service-art-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.service-art-wrap {
+    animation: serviceArtMove;
+    animation-timeline: view();
+    animation-range: entry 10% cover 70%;
+}
+
+@keyframes serviceArtMove {
+    from {
+        transform: translateX(600px);
+    } to {
+        transform: translateX(0);
+        
+    }
+}
+
+.service-art {
+    width: 600px;
+    height: 150px;
+    border-radius: 1000px;
+    background-color: var(--HomerYellow);
+    position: relative;
+    right: 0;
+    left: 0;
+    top: 10dvh;
+    margin: auto;
+    transition: all 0.8s ease;
+}
+
+
+
+.service-art::after {
+    content: 'Our Services';
+    position: absolute;
+    font-family: var(--Sim);
+    font-size: 5rem;
+    width: 600px;
+    align-self: center;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.cart {
+    width: 100%;
+    overflow: hidden;
+    background: white;
+    padding: 20px 0;
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 6px rgba(0,0,0,0.1); */
+    position: absolute;
+    top: 35dvh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-shadow: inset 0 -2px 6px rgba(0,0,0,0.4);
+}
+
+.cart-track {
+    display: flex;
+    width: max-content;
+    animation: scroll 15s linear infinite;
+    flex-shrink: 0;
+}
+
+.cart-track:hover {
+    animation-play-state: paused;
+}
+
+.card {
+    width: 400px;
+    height: 500px;
+    margin: 0 15px;
+    background: var(--Intro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 6px;
+    border-radius: 1rem;
+    position: relative;
+}
+
+.card:nth-child(1) {
+    background-image: url(assets/img/The_Simpsons_Movie_15.JPG.webp);
+    background-position: center;
+    background-size: cover;
+    background-position: 60%;
+    background-repeat: no-repeat;
+}
+
+.card:nth-child(1)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+    background-color: rgba(0,0,0,0.2);
+}
+
+@keyframes scroll {
+    from {
+        transform: translate(0);
+    } to {
+        transform: translateX(-50%);
+    }
+}
+
+.card > h1 {
+    font-family: var(--Sim);
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: fit-content;
+    color: var(--textWhite);
+    font-family: 1rem;
+    text-shadow: 4px 2px 5px black;
+}
+
+.card > a {
+    padding: 10px 40px;
+    width: fit-content;
+    border: 5px solid #f5f5f5;
+    color: var(--textWhite);
+    border-radius: 1000px;
+    text-decoration: none;
+    font-family: var(--Sim);
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-shadow: 0 0 5px black;
+    transition: all 0.3s ease;
+}
+
+.card > a:hover {
+    color: var(--Intro);
+    border: 5px solid var(--Intro);
+    background-color: var(--textWhite);
+}
+
+
+
+
+
+
+
 
 </style>
 
@@ -315,8 +747,8 @@ header > nav > button:hover {
 
         <nav>
             <a href="#home" onclick="new Audio('assets/sound/boring_5.mp3').play()">Home</a>
-            <a href="#" onclick="new Audio('assets/sound/burp.mp3').play()">About us</a>
-            <a href="#" onclick="new Audio('assets/sound/scream-short.mp3').play()">Services</a>
+            <a href="#Aboutus" onclick="new Audio('assets/sound/burp.mp3').play()">About us</a>
+            <a href="#servicecenter" onclick="new Audio('assets/sound/scream-short.mp3').play()">Services</a>
             <a href="#" onclick="new Audio('assets/sound/evil.mp3').play()">Join us!</a>
             <a href="#" onclick="new Audio('assets/sound/longscream.mp3').play()">Support</a>
             <button commandFor="signin-btn" command="show-modal">Sign in</button>
@@ -354,12 +786,77 @@ header > nav > button:hover {
     <section class="intro">
 
         <div class="intro-container">
-        <h1>Welcome to the Simpson Services!</h1>
-        <img src="assets/img/intro/happyHomer.png"> <!-- Onclick function to change homer from nice to hurt and play a sound of dough!-->
+        <h1>Welcome to the <span>Simpson Services!</span></h1>
+        <p>"Family owned business, providing the highest service quality as possible.</p>
+        <img src="assets/img/intro/happyHomer.png" id="interactiveImage" style="cursor: pointer;"> 
         </div>
+
+    </section>
+
+    <section class="about-us">
+
+        <div class="art-container">
+            <div class="circle-wrap">
+                <div class="circlejerk"><img src="assets/img/about-us/maggie-easteregg.png" onclick="new Audio('assets/sound/maggie.mp3').play()" id="Aboutus"></div>
+                </div>
+        </div>
+
+        <div class="about-container">
+            <p>Hey there, space-coyote! I’m Homer Simpson, and I built this place so you can get exactly what you want without having to deal with, you know... <em>people</em>.</p>
+
+            <p>Why did I start a self-service joint? Simple. I figured, if a machine can do my job at the nuclear plant while I take a three-hour nap in Sector 7G, it can definitely help you get your stuff done faster. No lines, no awkward small talk, and absolutely no Flanders.</p>
+
+            <h3>Why Choose Us?</h3>
+
+            <ul>
+        <li><strong>You’re the Boss:</strong> You press the buttons, you get the stuff. It's like magic, but real!</li>
+        <li><strong>Zero Judgment:</strong> Want to buy three dozen donuts or rent a power sander at 3:00 AM? Your secret is safe with our automated system.</li>
+        <li><strong>Homer-Approved Simplicity:</strong> I designed the layout myself. If it’s too complicated for me to figure out in four seconds, it’s not here.</li>
+    </ul>
+    
+    <p class="aboutclosing">So go ahead, give it a shot! It’s so easy, even a total Barney could do it. And if anything breaks... uh, it was like that when you got here. <em>Mmm... automation...</em></p>
+
+          
+
+            <div class="family-background">
+                <img src="assets/img/about-us/familypic.png" id="interactiveFamily">
+            </div>
+        </div>
+
+    </section>
+
+    <section class="services-container" id="servicecenter">
+
+
+        <div class="service-art-container">
+            <div class="service-art-wrap">
+                <div class="service-art"></div>
+            </div>
+        </div>
+
+        <div class="cart">
+            <div class="cart-track">
+                <div class="card">
+                    <h1>Carpentry Services</h1>
+
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+            </div>
+        </div>
+
+
+
+
 
     </section>
     
 </body>
-</html>
 
+<script src="assets/js/interactivehomer.js"></script>
+<script src="assets/js/interactivefamily.js"></script>
+</html>
