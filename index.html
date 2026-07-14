@@ -49,6 +49,8 @@
     --Intro:#202020;
     --WhitePage:#FFFFFF;
     --textWhite: #f5f5f5;
+    --sloganP: rgba(0, 0, 0, 0.595);
+    --insetWhite: rgba(0,0,0,0.4);
 }
 
 .darkmode {
@@ -62,8 +64,11 @@
     --NightSurface: #1B2227;   
     --NightBorder: #2A3339; 
     --ButtonBackground: #202020;
+    --WhitePage: #282828;
     --DarkBackground: ;
     --Intro:#FFFFFF;
+    --sloganP: #FFFFFF;
+    --insetWhite: rgba(0,0,0,1);
 }
 
 .darkmode .background-section::after {
@@ -73,10 +78,25 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color:rgba(0,0,0,0.5);
 
+    background-image: url(assets/img/Springfield_night_1920x1080.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    animation: nightTime  2s ease forwards;
+}
+
+@keyframes nightTime {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
 
 }
+
+
 
 html  {
     scroll-behavior: smooth;
@@ -84,6 +104,7 @@ html  {
 
 body {
     /* overflow: hidden; */
+    background-color: var(--WhitePage);
 }
 
 .background-section {
@@ -131,6 +152,15 @@ header > a >img {
     height: 10dvh;
 }
 
+.darkmode header > a > img {
+    filter: grayscale(100);
+    transition: all 0.3s ease-in-out;
+}
+
+.darkmode header > a > img:hover {
+    filter: grayscale(0);
+}
+
 header > nav {
     display: flex;
     flex-direction: row;
@@ -147,6 +177,10 @@ header > nav > a {
     color: var(--FWhite);
     transition: all 0.2s ease;
     -webkit-text-stroke: 0.5px black;
+}
+
+.darkmode header > nav > a:hover {
+    color: var(--HomerYellow);
 }
 
 header > nav > a:hover {
@@ -322,6 +356,7 @@ header > nav > button:hover {
     position: absolute;
     top: 40dvh;
     left: 15vw;
+    color: var(--Intro);
     animation: hSideSwing linear both;
     animation-timeline: view();
     animation-range: entry 10% cover 50%;
@@ -352,7 +387,7 @@ header > nav > button:hover {
     left: 35vw;
     text-align: right;
     font-weight: 100;
-    color: rgba(0, 0, 0, 0.595);
+    color: var(--sloganP);
     animation: pOA linear both;
     animation-timeline: view();
     animation-range: entry 10% cover 50%;
@@ -383,12 +418,14 @@ header > nav > button:hover {
     top: 180dvh;
     left: 0;
     height: 90dvh;
+    /* background: var(--WhitePage); */
 }
 
 .art-container {
     position: relative;
     width: 100%;
     height: 100%;
+    background: var(--WhitePage);
 }
 
 .circlejerk {
@@ -444,13 +481,13 @@ header > nav > button:hover {
 .about-contianer {
     position: relative;
     width: 100%;
-    background-color: red;
     height: 100%;
 }
 
 .about-container > p {
     width: 800px;
     font-family: var(--Sim);
+    color: var(--Intro);
     font-size: 1.2rem;
     position: absolute;
     top: 43dvh;
@@ -490,6 +527,7 @@ header > nav > button:hover {
     position: absolute;
     top: 53dvh;
     left: 3vw;
+    color: var(--Intro);
 }
 
 .about-container > h3 {
@@ -497,6 +535,7 @@ header > nav > button:hover {
     top: 71dvh;
     left: 6vw;
     font-family: var(--Sim);
+    color: var(--Intro);
     font-size: 1.3rem;
 }
 
@@ -507,6 +546,7 @@ header > nav > button:hover {
     width: 650px;
     font-family: var(--Sim);
     line-height: 3;
+    color: var(--Intro);
 }
 
 .about-container > .aboutclosing {
@@ -623,7 +663,7 @@ html, body {
 .cart {
     width: 100%;
     overflow: hidden;
-    background: white;
+    background: var(--WhitePage);
     padding: 20px 0;
     /* border-radius: 8px; */
     /* box-shadow: 0 4px 6px rgba(0,0,0,0.1); */
@@ -632,14 +672,15 @@ html, body {
     left: 0;
     right: 0;
     margin: auto;
-    box-shadow: inset 0 -2px 6px rgba(0,0,0,0.4);
+    box-shadow: inset 0 0px 6px var(--insetWhite);
 }
 
 .cart-track {
     display: flex;
     width: max-content;
-    animation: scroll 15s linear infinite;
+    animation: scroll 30s linear infinite;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .cart-track:hover {
@@ -661,7 +702,7 @@ html, body {
     position: relative;
 }
 
-.card:nth-child(1) {
+.card.carpentry {
     background-image: url(assets/img/The_Simpsons_Movie_15.JPG.webp);
     background-position: center;
     background-size: cover;
@@ -669,7 +710,7 @@ html, body {
     background-repeat: no-repeat;
 }
 
-.card:nth-child(1)::before {
+.card.carpentry::before {
     content: '';
     position: absolute;
     top: 0;
@@ -721,11 +762,234 @@ html, body {
 }
 
 .card > a:hover {
-    color: var(--Intro);
-    border: 5px solid var(--Intro);
-    background-color: var(--textWhite);
+    color: #222;
+    border: 5px solid #222;
+    background-color: #f5f5f5;
 }
 
+.card.church {
+    background-image: url(assets/img/The_Simpsons_Movie_8.JPG.webp);
+    background-position: center;
+    background-size: cover;
+    background-position: 60%;
+    background-repeat: no-repeat;   
+}
+
+.card.church::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.card.festival {
+    background-image: url(assets/img/The_Simpsons_Movie_3.JPG.webp);
+    background-position: center;
+    background-size: cover;
+    background-position: 60%;
+    background-repeat: no-repeat; 
+}
+
+.card.festival::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.card.demolition {
+    background-image: url(assets/img/kRu4nGWXw7QXHaoi0kLe9PwkmUg.webp);
+    background-position: center;
+    background-size: cover;
+    background-position: 60%;
+    background-repeat: no-repeat; 
+}
+
+.card.demolition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.card.safety {
+    background-image: url(assets/img/The_Simpsons_Movie_17.JPG.webp);
+    background-position: center;
+    background-size: cover;
+    background-position: 15%;
+    background-repeat: no-repeat; 
+}
+
+.card.safety::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.card.pig {
+    background-image: url(assets/img/The_Simpsons_Movie_34.JPG.webp);
+    background-position: center;
+    background-size: cover;
+    background-position: 33%;
+    background-repeat: no-repeat; 
+}
+
+.card.pig::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    border-radius: inherit;
+    background-color: rgba(0,0,0,0.2);
+}
+
+#joinus {
+position: absolute;
+top: 440dvh;
+width: 100%;
+height: 80dvh;
+}
+
+.join-art {
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 350px;
+    height: 125px;
+    border-radius: 1000px;
+    background-color: var(--HomerYellow);
+    align-self: center;
+    animation: scrollLeftSide linear both;
+    animation-range: entry 10% cover 50%;
+    animation-timeline: view();
+}
+
+@keyframes scrollLeftSide {
+    from {
+        transform: translateX(-1000px);
+    } to {
+        transform: translateX(0);
+    }
+}
+
+.join-art > h1 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-self: center;
+    text-align: center;
+    font-family: var(--Sim);
+    font-size: 3rem;
+}
+
+#joinus > form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,.12);
+    width: 35%;
+    margin: auto;
+    margin-top: 5dvh;
+    padding: 20px 0;
+    gap: 32px;
+    background-color: #f5f5f5;
+}
+
+.darkmode #joinus > form {
+    box-shadow: 0 0 3px rgba(255,255,255,0.4);
+}
+
+#other-input-container {
+    display: none;
+
+}
+
+.labelinput {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.labelinput > label {
+    font-family: var(--Sim);
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    margin-left: 7vw;
+}
+
+.labelinput input[type="text"],
+.labelinput input[type="email"],
+.labelinput input[type="number"],
+.labelinput select,
+#other-input-container input {
+    width: 60%;             /* Makes them stretch to fill the form column */
+    padding: 10px;           /* Gives typing space inside the box */
+    border: 1px solid #ccc;
+    border-radius: 4px;      /* Slightly rounds the corners */
+    box-sizing: border-box;  /* Prevents padding from breaking the width */
+    margin: auto;
+}
+
+#other-input-container {
+    display: none;           /* Kept hidden until toggled */
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+#other-input-container label {
+   font-family: var(--Sim);
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    margin-left: 7vw;
+}
+
+/* Style the Submit button to stretch full-width */
+input[type="submit"] {
+    width: 60%;
+    padding: 12px;
+    background-color: #f7df1e; /* Yellow to match your "Join Us" theme */
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin: auto;
+}
+
+input[type="submit"]:hover {
+    background-color: #e5cd1c; /* Slightly darker yellow on hover */
+}
 
 
 
@@ -749,7 +1013,7 @@ html, body {
             <a href="#home" onclick="new Audio('assets/sound/boring_5.mp3').play()">Home</a>
             <a href="#Aboutus" onclick="new Audio('assets/sound/burp.mp3').play()">About us</a>
             <a href="#servicecenter" onclick="new Audio('assets/sound/scream-short.mp3').play()">Services</a>
-            <a href="#" onclick="new Audio('assets/sound/evil.mp3').play()">Join us!</a>
+            <a href="#joinus" onclick="new Audio('assets/sound/evil.mp3').play()">Join us</a>
             <a href="#" onclick="new Audio('assets/sound/longscream.mp3').play()">Support</a>
             <button commandFor="signin-btn" command="show-modal">Sign in</button>
         </nav>
@@ -836,18 +1100,123 @@ html, body {
 
         <div class="cart">
             <div class="cart-track">
-                <div class="card">
-                    <h1>Carpentry Services</h1>
 
+                <!-- ===== SET 1 (real content) ===== -->
+                <div class="card carpentry">
+                    <h1>Carpentry Services</h1>
                     <a href="#">Learn More</a>
                 </div>
-                <div class="card"></div>
-                <div class="card"></div>
-                <div class="card"></div>
-                <div class="card"></div>
-                <div class="card"></div>
+
+                <div class="card church">
+                    <h1>Confessor Services</h1>
+                    <a href="#">Learn More</a>
+                </div>
+
+                <div class="card festival">
+                    <h1>Festival Services</h1>
+                    <a href="#">Learn More</a>
+                </div>
+
+                <div class="card demolition">
+                    <h1>Demolition Services</h1>
+                    <a href="#">Learn More</a>
+                </div>
+
+                <div class="card safety">
+                    <h1>Safety Services</h1>
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="card pig">
+                    <h1>Pig Baby Sitter</h1>
+                    <a href="#">Learn More</a>
+                </div>
+
+                <!-- ===== SET 2 (exact duplicate for seamless loop) ===== -->
+                <div class="card carpentry" aria-hidden="true">
+                    <h1>Carpentry Services</h1>
+                    <a href="#" tabindex="-1">Learn More</a>
+                </div>
+
+                <div class="card church" aria-hidden="true">
+                    <h1>Confessor Services</h1>
+                    <a href="#">Learn More</a>
+                </div>
+
+                <div class="card festival" aria-hidden="true">
+                    <h1>Festival Services</h1>
+                    <a href="#">Learn More</a>
+                </div>
+                
+                <div class="card demolition" aria-hidden="true">
+                    <h1>Demolition Services</h1>
+                    <a href="#">Learn More</a>
+                </div>
+
+                <div class="card safety" aria-hidden="true">
+                    <h1>Safety Services</h1>
+                    <a href="#">Learn More</a>
+                </div>
+
+                <div class="card pig" aria-hidden="true">
+                    <h1>Pig Baby Sitter</h1>
+                    <a href="#">Learn More</a>
+                </div>
             </div>
+
         </div>
+
+    </section>
+
+    <section id="joinus">
+
+        <div class="join-art">
+            <h1>Join Us</h1>
+        </div>
+
+        <form action="" method="post">
+            
+                <div class="labelinput">
+                    <label for="user_firstname">First Name</label>
+                    <input type="text" placeholder="First name..." name="user_firstname">
+                </div>
+
+                <div class="labelinput">
+                    <label for="user_lastname">Last Name</label>
+                    <input type="text" placeholder="last name..." name="user_lastname">
+                </div>
+
+                <div class="labelinput">
+                    <label for="user_email">Email</label>
+                    <input type="email" placeholder="email..." name="user_email">
+                </div>
+
+                <div class="labelinput">
+                    <label for="user_phonenumber">Phonenumber</label>
+                    <input type="number" placeholder="Phone number..." name="user_phonenumber">
+
+            </div>
+
+            <div class="labelinput">
+                <label for="countrypicker">What Country are you from?</label>
+                <select name="countrypicker" id="countrypick" onchange="toggleOtherinput()">
+                    <option value="australia">Australia</option>
+                    <option value="unitedstates">United States</option>
+                    <option value="northkorea">North Korea</option>
+                    <option value="springfield">Spring Field</option>
+                    <option value="quahog">Quahog</option>
+                    <option value="london">London</option>
+                    <option value="other">Other...</option>
+                </select>
+            </div>
+
+             <div id="other-input-container">
+                    <label for="othercountry">Please Specify:</label>
+                    <input type="text" name="othercountry" id="other_country">
+                </div>
+
+                <input type="submit" value="Submit">
+
+        </form>
 
 
 
@@ -857,6 +1226,10 @@ html, body {
     
 </body>
 
+
+
 <script src="assets/js/interactivehomer.js"></script>
 <script src="assets/js/interactivefamily.js"></script>
+<script src="assets/js/other.js"></script>
+
 </html>
