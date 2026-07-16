@@ -79,23 +79,9 @@ html {
 
 body {
     margin: 0;
-    display: flow-root;   /* stops header's 3dvh margin collapsing through body */
     position: relative;   /* now body IS the containing block */
     overflow-x: clip;     /* clip, not hidden — can't be scrolled at all */
-}
-
-/* Desktop only: every section is absolutely placed, so body has no natural height */
-@media (min-width: 901px) {
-    body { min-height: 520dvh; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+    min-height: 520dvh;
 }
 
 .darkmode .background-section::after {
@@ -130,6 +116,7 @@ html  {
 }
 
 body {
+    /* overflow: hidden; */
     background-color: var(--WhitePage);
 }
 
@@ -611,6 +598,11 @@ header > nav > button:hover {
     }
 }
 
+html, body {
+    overflow-x:hidden;
+    max-width: 100%;
+}
+
 .services-container {
     position: absolute;
 
@@ -1012,53 +1004,112 @@ input[type="submit"]:hover {
     background-color: #e5cd1c; /* Slightly darker yellow on hover */
 }
 
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: transparent;
+    border: transparent;
+}
+
 .hamburger-btn {
     display: none;
 }
 
-/* ============================================================================
-   HAMBURGER DRAWER
-   Only ever opened by .hamburger-btn, which only exists under 900px — so these
-   live at top level rather than inside the query. Keeps the open/closed/
-   @starting-style triplet together instead of split across a breakpoint.
-   ============================================================================ */
+/* Mobile Phone Compatibility */
+@media (max-width:430px) {
 
-/* [open] is required here — a bare `#hamburger { display: flex }` would outrank
-   the UA's `dialog:not([open]) { display: none }` and the drawer would never shut. */
-#hamburger[open] {
-    display: flex;
-    flex-direction: column;
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    header > nav > a {
+        display: none;
+    }
+
+    header > a > img {
+        height: 8dvh;
+        margin-left: 5vw;
+    }
+
+    header > nav > button {
+        display: none;
+    }
+
+    header {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #themeSwitch {
+        display: none;
+    }
+
+    .hamburger-btn {
+        display: block;
+        background-color: transparent;
+        border: transparent;
+        margin-right: 5vw;
+        align-self: center;
+    }
+    
+    .hamburger-btn > i {
+        font-size: 3rem;
+        color: var(--HomerYellow);
+        align-self: center;
+    }
+
+    #hamburger {
+        /* Reset native dialog defaults */
+        position: relative;
+        margin-right: 0;
+        margin-top: 0;
+        right: 0;
+        top: 0;
+        width: 50vw;
+        height: 100%;
+        border: transparent;
+        
+        /* 1. Define the OPEN state */
+        transform: translateX(0);
+
+        /* 2. Animate transforms, along with display/overlay for exit states */
+        transition: transform 0.4s ease, display 0.4s ease allow-discrete, overlay 0.4s ease allow-discrete;
+        contain: layout paint;
+    }
+
+    /* Backdrop overlay animation */
+    #hamburger::backdrop {
+        background-color: rgba(0,0,0,0.5);
+        opacity: 1;
+        transition: opacity 0.4s ease, display 0.4s ease allow-discrete, overlay 0.4s ease allow-discrete;
+    }
+
+    #hamburger > button {
+        border: transparent;
+        background-color: transparent;
+        margin-left: 0;
+        cursor: pointer;
+    }
+
+    #hamburger > button > i {
+        font-size: 2rem;
+    }
 }
 
-#hamburger {
-    position: fixed;
-    inset: 0 0 0 auto;          /* pinned to the right edge, full height */
-    margin: 0;
-    padding: 0;
-    width: min(70vw, 320px);
-    max-width: none;
-    max-height: none;
-    height: 100dvh;
-    border: transparent;
-    background-color: #333;
-
-    /* OPEN state */
-    transform: translateX(0);
-
-    transition: transform 0.4s ease,
-                display 0.4s ease allow-discrete,
-                overlay 0.4s ease allow-discrete;
-}
-
-#hamburger::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 1;
-    transition: opacity 0.4s ease,
-                display 0.4s ease allow-discrete,
-                overlay 0.4s ease allow-discrete;
-}
-
-/* CLOSED state */
+/* 3. Define the CLOSED state (Keep these outside the media query or inside it, 
+   but ensuring correct syntax) */
 #hamburger:not([open]) {
     transform: translateX(100%);
 }
@@ -1067,7 +1118,7 @@ input[type="submit"]:hover {
     opacity: 0;
 }
 
-/* STARTING state — where the open animation begins */
+/* 4. Define the STARTING state (Tells browser to animate *from* here when opened) */
 @starting-style {
     #hamburger[open] {
         transform: translateX(100%);
@@ -1075,521 +1126,28 @@ input[type="submit"]:hover {
     #hamburger[open]::backdrop {
         opacity: 0;
     }
-}
 
-#hamburger > button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: transparent;
-    background-color: transparent;
-    color: var(--textWhite);
-    margin: 0;
-    padding: 14px 18px;
-    min-width: 44px;
-    min-height: 44px;
-    align-self: flex-start;
-    cursor: pointer;
-}
-
-#hamburger > button > i {
-    font-size: 2rem;
+    
 }
 
 .hamburger-nav-btn {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    padding: 1rem 1.5rem 3rem;
-    flex: 1;
-}
-
-.nav-link {
-    position: static;
-    font-family: var(--Sim);
-    font-size: 1.5rem;
-    color: var(--textWhite);
-    text-decoration: none;
-    padding: 8px 0;
-}
-
-.nav-link:hover,
-.nav-link:focus-visible {
-    color: var(--HomerYellow);
-}
-
-.nav-signin {
-    font-family: var(--Sim);
-    font-size: 1.4rem;
-    color: var(--HomerYellow);
-    background: transparent;
-    border: 2px solid var(--HomerYellow);
-    border-radius: 10px 30px;
-    padding: 8px 20px;
-    margin-top: auto;
-    cursor: pointer;
-}
-
-
-/* ============================================================================
-   RESPONSIVE LAYER
-   Everything above is the untouched desktop design (> 900px).
-   Below 900px the absolutely-positioned sections drop back into normal flow
-   so the page grows with its own content instead of guessing at dvh offsets.
-   ============================================================================ */
-
-@media (max-width: 900px) {
-
-    /* ---------- 1. Page shell ---------- */
-
-    /* background-attachment: fixed is broken on iOS Safari and janky on Android.
-       Fixing the element itself gives the same effect, reliably. */
-    .background-section {
-        position: fixed;
-        height: 100dvh;
-        background-attachment: scroll;
-    }
-
-    .darkmode .background-section::after {
-        background-attachment: scroll;
-    }
-
-    /* ---------- 2. Header ---------- */
-
-    header {
         width: 100%;
-        margin: 0;
-        padding: 2dvh 4vw;
-        box-sizing: border-box;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 3vw;
-        background-color: rgba(0, 0, 0, 0.25);
-        backdrop-filter: blur(6px);
-    }
-
-    header > a {
-        margin-right: auto;
-        display: flex;
-    }
-
-    header > a > img {
-        height: 7dvh;
-        min-height: 44px;
-        margin-left: 0;
-    }
-
-    header > nav {
-        display: none;
-    }
-
-    /* keep the theme toggle reachable on a phone instead of hiding it */
-    #themeSwitch {
-        display: flex;
-        position: static;
-        height: 40px;
-        width: 40px;
-        flex: 0 0 auto;
-    }
-
-    #themeSwitch > svg,
-    .darkmode #themeSwitch > svg {
-        width: 28px;
-        height: 28px;
-    }
-
-    .hamburger-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: transparent;
-        border: transparent;
-        padding: 0;
-        /* never let the tap target depend on the icon font loading */
-        min-width: 44px;
-        min-height: 44px;
-        align-self: center;
-        cursor: pointer;
-    }
-
-    .hamburger-btn > i {
-        font-size: 2.6rem;
-        line-height: 1;
-        color: var(--HomerYellow);
-        -webkit-text-stroke: 0.5px black;
-    }
-
-    /* ---------- 3. Sections back into flow ---------- */
-
-    .intro,
-    .about-us,
-    .services-container,
-    #joinus {
-        position: static;
-        width: 100%;
-        height: auto;
-        top: auto;
-        left: auto;
-        right: auto;
-        margin: 0;
-        box-sizing: border-box;
-    }
-
-    /* ---------- 4. Intro ---------- */
-
-    .intro {
-        margin-top: 62dvh;          /* lets the Springfield art breathe first */
-        padding: 6dvh 6vw 8dvh;
-        background-color: var(--WhitePage);
-    }
-
-    .intro > .intro-container {
-        position: static;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 2dvh;
-    }
-
-    .intro > .intro-container > h1 {
-        position: static;
-        top: auto;
-        left: auto;
-        font-size: clamp(2rem, 9vw, 3.2rem);
-        margin: 0;
-        order: 1;
-    }
-
-    .intro > .intro-container > p {
-        position: static;
-        top: auto;
-        left: auto;
-        width: 100%;
-        max-width: 38ch;
-        text-align: center;
-        font-size: 1.05rem;
-        margin: 0;
-        order: 2;
-    }
-
-    .intro > .intro-container > img {
-        position: static;
-        top: auto;
-        right: auto;
-        height: auto;
-        width: min(72vw, 300px);
-        order: 3;
-    }
-
-    @keyframes hSideSwing {
-        from { transform: translateX(-60vw); opacity: 0; }
-        to   { transform: translateX(0); opacity: 1; }
-    }
-
-    /* ---------- 5. About us — the yellow band ---------- */
-
-    .about-us {
-        display: flex;
-        flex-direction: column;
-        background-color: var(--WhitePage);
-    }
-
-    .art-container {
-        height: auto;
-        padding: 5dvh 0;
-        overflow: clip; 
-    }
-
-    .circlejerk {
-        left: auto;
-        top: auto;
-        margin: 0 auto;
-        width: clamp(90px, 24vw, 150px);
-        height: clamp(90px, 24vw, 150px);
-    }
-
-    .circlejerk:hover {
-        transform: none;            /* hover isn't a thing on touch */
-    }
-
-    .circlejerk::before {
-        width: 112vw;
-        left: -100vw;
-    }
-
-    .circlejerk::after {
-        width: 90vw;
-        left: -15px;
-        transform: translateX(-50%);
-        font-size: clamp(2rem, 10vw, 3.5rem);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .circlejerk > img {
-        height: clamp(70px, 18vw, 120px);
-        left: -180px;  
-        top: 0;
-        bottom: 0;
-        margin: auto;
-
-    }
-
-    @keyframes slideOutAbout {
-        from { transform: translateX(-100vw); }
-        to   { transform: translateX(0); }
-    }
-
-    /* ---------- 6. About us — the copy ---------- */
-
-    .about-container {
-        position: static;
-        display: flex;
-        flex-direction: column;
-        gap: 2dvh;
-        padding: 5dvh 6vw 2dvh;
-        background-color: var(--WhitePage);
-    }
-
-    /* p:nth-child(2) below outranks `.about-container > p`, so it needs naming */
-    .about-container > p,
-    .about-container > p:nth-child(2),
-    .about-container > .aboutclosing,
-    .about-container > h3,
-    .about-container > ul {
-        position: static;
-        top: auto;
-        left: auto;
-        width: 100%;
-        margin: 0;
-    }
-
-    .about-container > p,
-    .about-container > .aboutclosing {
-        font-size: 1.05rem;
-        line-height: 1.6;
-    }
-
-    .about-container > h3 {
-        font-size: 1.5rem;
-        margin-top: 1dvh;
-    }
-
-    .about-container > ul {
-        line-height: 1.7;
-        padding-left: 1.2rem;
-        box-sizing: border-box;
-    }
-
-    .about-container > ul > li {
-        margin-bottom: 1rem;
-    }
-
-    .about-container > .family-background {
-        position: relative;
-        top: auto;
-        right: 0;
-        left: 0;
-        width: min(88vw, 420px);
-        height: min(88vw, 420px);
-        margin: 3dvh auto 0;
-        animation-range: entry 0% cover 40%;
-    }
-
-    .about-container > .family-background::before {
         height: 100%;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        right: -200px;
-    }
-
-    /* desktop is 40rem tall inside an 800px circle — keep that ~80% ratio */
-    .about-container > .family-background > img {
-        height: 80%;
-        width: auto;
-        max-width: none;
-        top: 50%;
-        left: 50%;
-        right: auto;
-        bottom: auto;
-        margin: 0;
-        transform: translate(-50%, -50%);
-    }
-
-    @keyframes slideOutAnimation {
-        from { transform: translateX(60vw); opacity: 0; }
-        to   { transform: translateX(0); opacity: 1; }
-    }
-
-    /* ---------- 7. Services ---------- */
-
-    .services-container {
         display: flex;
         flex-direction: column;
-        background-color: var(--WhitePage);
-        padding-bottom: 5dvh;
+        position: relative;
     }
 
-    .service-art-container {
-        height: auto;
-        padding: 4dvh 0 3dvh;
-        overflow: clip;
-    }
-
-    .service-art {
-        width: min(88vw, 600px);
-        height: clamp(90px, 24vw, 150px);
-        top: auto;
-    }
-
-    .service-art::after {
-        width: 100%;
+    .nav-link {
+        position: absolute;
         left: 0;
-        right: 0;
-        font-size: clamp(1.8rem, 9vw, 3.5rem);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        font-family: var(--Sim);
+        color: var(--textWhite);
     }
 
-    @keyframes serviceArtMove {
-        from { transform: translateX(100vw); }
-        to   { transform: translateX(0); }
-    }
 
-    .cart {
-        position: static;
-        top: auto;
-        padding: 16px 0;
-    }
 
-    .cart-track {
-        animation-duration: 22s;    /* shorter track — keeps the pixel speed similar */
-    }
 
-    .card {
-        width: min(72vw, 320px);
-        height: min(96vw, 420px);
-        margin: 0 8px;
-    }
-
-    .card > h1 {
-        font-size: 1.4rem;
-        width: 90%;
-        text-align: center;
-    }
-
-    .card > a {
-        font-size: 1.1rem;
-        padding: 8px 28px;
-        border-width: 3px;
-    }
-
-    /* ---------- 8. Join us ---------- */
-
-    #joinus {
-        padding: 4dvh 5vw 10dvh;
-        background-color: var(--WhitePage);
-    }
-
-    .join-art {
-        width: min(78vw, 350px);
-        height: clamp(80px, 22vw, 125px);
-    }
-
-    .join-art > h1 {
-        font-size: clamp(1.8rem, 8vw, 3rem);
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    @keyframes scrollLeftSide {
-        from { transform: translateX(-100vw); }
-        to   { transform: translateX(0); }
-    }
-
-    #joinus > form {
-        width: min(92vw, 460px);
-        gap: 18px;
-        padding: 24px 0;
-        box-sizing: border-box;
-    }
-
-    .labelinput,
-    #other-input-container {
-        align-items: center;
-        margin-bottom: 6px;
-    }
-
-    .labelinput > label,
-    #other-input-container label {
-        margin-left: 0;
-        width: 82%;
-    }
-
-    .labelinput input[type="text"],
-    .labelinput input[type="email"],
-    .labelinput input[type="number"],
-    .labelinput select,
-    #other-input-container input,
-    input[type="submit"] {
-        width: 82%;
-        font-size: 16px;            /* under 16px, iOS zooms the page on focus */
-    }
-
-    input[type="submit"] {
-        padding: 14px;
-    }
-
-    /* ---------- 9. Sign-in dialog ---------- */
-
-    #signin-btn {
-        width: min(88vw, 380px);
-        box-sizing: border-box;
-        padding: 10px 20px 3dvh;
-    }
-
-    #signin-btn > form > input {
-        width: 100%;
-        box-sizing: border-box;
-        font-size: 16px;
-    }
-}
-
-/* ---------- Small phones ---------- */
-
-@media (max-width: 430px) {
-
-    .about-container > p,
-    .about-container > .aboutclosing {
-        font-size: 1rem;
-    }
-
-    .intro { margin-top: 56dvh; }
-}
-
-/* ---------- Landscape phones: the hero would eat the whole screen ---------- */
-
-@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
-
-    .intro { margin-top: 40dvh; }
-
-    .intro > .intro-container > img { width: min(40vw, 220px); }
-
-    .card {
-        width: min(40vw, 320px);
-        height: 70dvh;
-    }
-
-    .hamburger-nav-btn { gap: 0.4rem; }
-
-    .nav-link { font-size: 1.2rem; padding: 4px 0; }
-}
 
 </style>
 
@@ -1608,7 +1166,8 @@ input[type="submit"]:hover {
             <a href="#Aboutus" onclick="new Audio('assets/sound/burp.mp3').play()">About us</a>
             <a href="#servicecenter" onclick="new Audio('assets/sound/scream-short.mp3').play()">Services</a>
             <a href="#joinus" onclick="new Audio('assets/sound/evil.mp3').play()">Join us</a>
-            <button commandFor="signin-btn" command="show-modal" onclick="new Audio('assets/sound/longscream.mp3').play()">Sign in</button>
+            <a href="#" onclick="new Audio('assets/sound/longscream.mp3').play()">Support</a>
+            <button commandFor="signin-btn" command="show-modal">Sign in</button>
         </nav>
 
         <button id="themeSwitch">
@@ -1623,12 +1182,11 @@ input[type="submit"]:hover {
             <button commandFor="hamburger" command="close"><i class="bi bi-arrow-bar-right"></i></button>
 
             <div class="hamburger-nav-btn">
-                <a href="#home" class="nav-link" onclick="new Audio('assets/sound/boring_5.mp3').play(); hamburger.close()">Home</a>
-                <a href="#Aboutus" class="nav-link" onclick="new Audio('assets/sound/burp.mp3').play(); hamburger.close()">About us</a>
-                <a href="#servicecenter" class="nav-link" onclick="new Audio('assets/sound/scream-short.mp3').play(); hamburger.close()">Services</a>
-                <a href="#joinus" class="nav-link" onclick="new Audio('assets/sound/evil.mp3').play(); hamburger.close()">Join us</a>
-                <a href="#" class="nav-link" onclick="new Audio('assets/sound/longscream.mp3').play(); hamburger.close()">Support</a>
-                <button class="nav-signin" commandFor="signin-btn" command="show-modal" onclick="hamburger.close()">Sign in</button>
+                <a href="#home" class="nav-link"></a>
+                <a href="#Aboutus" class="nav-link"></a>
+                <a href="#servicecenter" class="nav-link"></a>
+                <a href="#joinus" class="nav-link"></a>
+                <a href="#" class="nav-link"></a>
             </div>
         </dialog>
 

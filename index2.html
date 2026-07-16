@@ -79,7 +79,6 @@ html {
 
 body {
     margin: 0;
-    display: flow-root;   /* stops header's 3dvh margin collapsing through body */
     position: relative;   /* now body IS the containing block */
     overflow-x: clip;     /* clip, not hidden — can't be scrolled at all */
 }
@@ -1298,7 +1297,7 @@ input[type="submit"]:hover {
     .art-container {
         height: auto;
         padding: 5dvh 0;
-        overflow: clip; 
+        overflow: clip;             /* contains the band + the slide-in */
     }
 
     .circlejerk {
@@ -1314,13 +1313,13 @@ input[type="submit"]:hover {
     }
 
     .circlejerk::before {
-        width: 112vw;
+        width: 200vw;
         left: -100vw;
     }
 
     .circlejerk::after {
         width: 90vw;
-        left: -15px;
+        left: 50%;
         transform: translateX(-50%);
         font-size: clamp(2rem, 10vw, 3.5rem);
         display: flex;
@@ -1330,11 +1329,8 @@ input[type="submit"]:hover {
 
     .circlejerk > img {
         height: clamp(70px, 18vw, 120px);
-        left: -180px;  
-        top: 0;
-        bottom: 0;
-        margin: auto;
-
+        left: auto;
+        right: -34vw;
     }
 
     @keyframes slideOutAbout {
@@ -1390,8 +1386,7 @@ input[type="submit"]:hover {
     .about-container > .family-background {
         position: relative;
         top: auto;
-        right: 0;
-        left: 0;
+        right: auto;
         width: min(88vw, 420px);
         height: min(88vw, 420px);
         margin: 3dvh auto 0;
@@ -1399,11 +1394,7 @@ input[type="submit"]:hover {
     }
 
     .about-container > .family-background::before {
-        height: 100%;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        right: -200px;
+        display: none;              /* the band extension only reads on desktop */
     }
 
     /* desktop is 40rem tall inside an 800px circle — keep that ~80% ratio */
@@ -1608,7 +1599,8 @@ input[type="submit"]:hover {
             <a href="#Aboutus" onclick="new Audio('assets/sound/burp.mp3').play()">About us</a>
             <a href="#servicecenter" onclick="new Audio('assets/sound/scream-short.mp3').play()">Services</a>
             <a href="#joinus" onclick="new Audio('assets/sound/evil.mp3').play()">Join us</a>
-            <button commandFor="signin-btn" command="show-modal" onclick="new Audio('assets/sound/longscream.mp3').play()">Sign in</button>
+            <a href="#" onclick="new Audio('assets/sound/longscream.mp3').play()">Support</a>
+            <button commandFor="signin-btn" command="show-modal">Sign in</button>
         </nav>
 
         <button id="themeSwitch">
