@@ -1,5 +1,5 @@
 const imageElement = document.getElementById('interactiveImage');
-const clickSound = new Audio('assets/sound/doh-9.mp3'); 
+const clickSound = new Audio('./assets/sound/doh-9.mp3'); 
 
 // Functions to switch state
 function setHurtState(e) {
@@ -8,11 +8,11 @@ function setHurtState(e) {
     
     clickSound.currentTime = 0; 
     clickSound.play().catch(err => console.log("Audio interaction wait"));
-    imageElement.setAttribute('src', 'assets/img/intro/clickedon1.png');
+    imageElement.setAttribute('src', './assets/img/intro/clickedon1.png');
 }
 
 function setHappyState() {
-    imageElement.setAttribute('src', 'assets/img/intro/happyhomer.png');
+    imageElement.setAttribute('src', './assets/img/intro/happyHomer.png');
 }
 
 // Desktop Mouse Events

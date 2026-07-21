@@ -19,6 +19,24 @@
     <!-- LIGHT/DARK MODE -->
     <script type="text/javascript" src="assets/js/darkmode.js" defer></script>
 
+    <!-- PRELOAD PHOTOS -->
+    <link rel="preload" href="assets/img/Springfield_1920x1080.png">
+    <link rel="preload" href="assets/img/Springfield_night_1920x1080.png">
+    <link rel="preload" href="assets/img/intro/clickedon1.png">
+    <link rel="preload" href="assets/img/intro/happyHomer.png">
+    <link rel="preload" href="assets/img/about-us/bart.png">
+    <link rel="preload" href="assets/img/about-us/familypic.png">
+    <link rel="preload" href="assets/img/about-us/maggie-easteregg.png">
+    <link rel="preload" href="assets/img/logo/pngwing.com (1).png">
+
+  
+    <!-- PREFETCH PHOTOS -->
+    <link rel="prefetch" href="assets/img/The_Simpsons_Movie_15.JPG.webp">
+    <link rel="prefetch" href="assets/img/The_Simpsons_Movie_17.JPG.webp">
+    <link rel="prefetch" href="assets/img/The_Simpsons_Movie_3.JPG.webp">
+    <link rel="prefetch" href="assets/img/The_Simpsons_Movie_34.JPG.webp">
+    <link rel="prefetch" href="assets/img/The_Simpsons_Movie_8.JPG.webp">
+
 </head>
 
 <style>
@@ -75,6 +93,10 @@
 
 html {
     overflow-x: clip;
+}
+
+img {
+    content-visibility: auto;
 }
 
 body {
@@ -163,7 +185,7 @@ body {
 }
 
 header {
-    width: 90%;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -172,7 +194,11 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    margin-top: 0;
 }
+
 
 header > a >img {
     height: 10dvh;
@@ -968,7 +994,7 @@ height: 80dvh;
 
 .labelinput input[type="text"],
 .labelinput input[type="email"],
-.labelinput input[type="number"],
+.labelinput input[type="tel"],
 .labelinput select,
 #other-input-container input {
     width: 60%;             /* Makes them stretch to fill the form column */
@@ -1121,12 +1147,11 @@ input[type="submit"]:hover {
 .nav-signin {
     font-family: var(--Sim);
     font-size: 1.4rem;
-    color: var(--HomerYellow);
-    background: transparent;
+    color: var(--FWhite);
+    background: var(--ButtonBackground);
     border: 2px solid var(--HomerYellow);
     border-radius: 10px 30px;
     padding: 8px 20px;
-    margin-top: auto;
     cursor: pointer;
 }
 
@@ -1464,6 +1489,7 @@ input[type="submit"]:hover {
         position: static;
         top: auto;
         padding: 16px 0;
+        background-color: var(#f5f5f5);
     }
 
     .cart-track {
@@ -1589,9 +1615,13 @@ input[type="submit"]:hover {
     .hamburger-nav-btn { gap: 0.4rem; }
 
     .nav-link { font-size: 1.2rem; padding: 4px 0; }
+    
 }
 
+
 </style>
+
+
 
 <body class="">
 
@@ -1627,8 +1657,7 @@ input[type="submit"]:hover {
                 <a href="#Aboutus" class="nav-link" onclick="new Audio('assets/sound/burp.mp3').play(); hamburger.close()">About us</a>
                 <a href="#servicecenter" class="nav-link" onclick="new Audio('assets/sound/scream-short.mp3').play(); hamburger.close()">Services</a>
                 <a href="#joinus" class="nav-link" onclick="new Audio('assets/sound/evil.mp3').play(); hamburger.close()">Join us</a>
-                <a href="#" class="nav-link" onclick="new Audio('assets/sound/longscream.mp3').play(); hamburger.close()">Support</a>
-                <button class="nav-signin" commandFor="signin-btn" command="show-modal" onclick="hamburger.close()">Sign in</button>
+                <button class="nav-signin" commandFor="signin-btn" command="show-modal" onclick="new Audio('assets/sound/longscream.mp3').play(); hamburger.close()">Sign in</button>
             </div>
         </dialog>
 
@@ -1637,7 +1666,7 @@ input[type="submit"]:hover {
 
     <dialog id="signin-btn" closedby="any">
 
-        <button commandFor="signin-btn" command="close">
+        <button commandFor="signin-btn" command="close" style="cursor:pointer;">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
         </button>
 
@@ -1784,7 +1813,7 @@ input[type="submit"]:hover {
             <h1>Join Us</h1>
         </div>
 
-        <form action="" method="post">
+        <form action="https://formsubmit.co/nbaird.dev@gmail.com" method="post">
             
                 <div class="labelinput">
                     <label for="user_firstname">First Name</label>
@@ -1803,7 +1832,7 @@ input[type="submit"]:hover {
 
                 <div class="labelinput">
                     <label for="user_phonenumber">Phonenumber</label>
-                    <input type="number" placeholder="Phone number..." name="user_phonenumber">
+                    <input type="tel" inputmode="numeric" placeholder="Phone number..." name="user_phonenumber">
 
             </div>
 
